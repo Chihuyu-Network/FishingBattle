@@ -17,14 +17,11 @@ object FishBattleManager {
 
     fun updateScoreboard() {
         FishData.data.keys.forEach {
-            val board = plugin.server.scoreboardManager!!.newScoreboard
-            board.getObjective(DisplaySlot.SIDEBAR)?.unregister()
-            val obj = board.registerNewObjective("fish_battle", Criteria.create("fished"), "    ${ChatColor.GOLD}${ChatColor.BOLD}${ChatColor.ITALIC}Fish Battle${ChatColor.RESET}    ")
+            it.player?.scoreboard?.getObjective(DisplaySlot.SIDEBAR)?.unregister()
+            if (!FishingBattle.isStarted) return@forEach
 
-            if (!FishingBattle.isStarted) {
-                obj.unregister()
-                return@forEach
-            }
+            val board = plugin.server.scoreboardManager!!.newScoreboard
+            val obj = board.registerNewObjective("fish_battle", Criteria.create("fished"), "    ${ChatColor.GOLD}${ChatColor.BOLD}${ChatColor.ITALIC}Fish Battle${ChatColor.RESET}    ")
 
             val scores = mutableListOf(
                 " ".repeat(1),
