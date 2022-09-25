@@ -1,5 +1,5 @@
 name: FishingBattle
-version: '1.0.0'
+version: '1.0.1'
 main: love.chihuyu.FishingBattle
 authors: [ Hirosuke ]
 api-version: 1.19
