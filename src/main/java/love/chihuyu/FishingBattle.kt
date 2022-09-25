@@ -115,7 +115,6 @@ class FishingBattle : JavaPlugin(), Listener {
             }
         }
         if (!isStarted) return
-        if (player !in FishData.data) FishData.data[player] = 0
         FishBattleManager.updateScoreboard()
         server.bossBars.forEach { it.removePlayer(player) }
     }
