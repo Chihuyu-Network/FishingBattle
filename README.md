@@ -9,6 +9,12 @@ Start own game.
 * `/fb stop`  
 Stop own game.
 
+* `/fb join`
+Join next game.
+
+* `/fb leave`
+Leave current game.
+
 * `/fishbattlestats[fbstats] highscore <player>`  
 See `player`'s highscore.
 
@@ -29,6 +35,12 @@ use /fb
 
 * `fishbattle.start`  
 use /fb start
+
+* `fishbattle.join`  
+use /fb join
+
+* `fishbattle.leave`  
+use /fb leave
 
 * `fishbattle.stop`  
 use /fb stop
