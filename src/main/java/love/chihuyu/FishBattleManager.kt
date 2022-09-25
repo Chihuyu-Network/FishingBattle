@@ -2,8 +2,10 @@ package love.chihuyu
 
 import love.chihuyu.FishingBattle.Companion.plugin
 import love.chihuyu.database.User
+import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.Sound
+import org.bukkit.entity.Fish
 import org.bukkit.scoreboard.Criteria
 import org.bukkit.scoreboard.DisplaySlot
 import org.jetbrains.exposed.sql.insert
@@ -14,8 +16,8 @@ import org.jetbrains.exposed.sql.update
 object FishBattleManager {
 
     fun updateScoreboard() {
-        plugin.server.onlinePlayers.forEach {
-            val board = it.scoreboard
+        FishData.data.keys.forEach {
+            val board = plugin.server.scoreboardManager!!.newScoreboard
             board.getObjective(DisplaySlot.SIDEBAR)?.unregister()
             val obj = board.registerNewObjective("fish_battle", Criteria.create("fished"), "    ${ChatColor.GOLD}${ChatColor.BOLD}${ChatColor.ITALIC}Fish Battle${ChatColor.RESET}    ")
 
@@ -38,6 +40,7 @@ object FishBattleManager {
             scores.forEachIndexed { index, s -> obj.getScore(s).score = -index }
 
             obj.displaySlot = DisplaySlot.SIDEBAR
+            Bukkit.getPlayer(it.uniqueId)?.scoreboard = board
         }
     }
 
@@ -65,9 +68,10 @@ object FishBattleManager {
 
     fun broadcastRanking() {
         val sortedList = FishData.data.toList().sortedByDescending { it.second }
-        plugin.server.onlinePlayers.forEach {
-            it.playSound(it, Sound.ENTITY_ENDER_DRAGON_DEATH, 1f, 1f)
-            it.sendTitle(
+        FishData.data.keys.forEach {
+            val player = Bukkit.getPlayer(it.uniqueId) ?: return@forEach
+            player.playSound(player, Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, 1f)
+            player.sendTitle(
                 "${ChatColor.RED}${ChatColor.BOLD}${ChatColor.ITALIC}Game Over！",
                 "Winner is ${ChatColor.BOLD}${sortedList[0].first.name}",
                 20, 100, 20
@@ -75,7 +79,7 @@ object FishBattleManager {
 
             transaction {
                 val user = User.select { User.uuid eq it.uniqueId }.single()
-                if (user[User.highscore] < (FishData.data[it] ?: 0)) it.sendMessage("${ChatColor.LIGHT_PURPLE}You beated high score!\n${user[User.highscore]}pt -> ${FishData.data[it]}pt")
+                if (user[User.highscore] < (FishData.data[it] ?: 0)) player.sendMessage("${ChatColor.LIGHT_PURPLE}You beated high score!\n${user[User.highscore]}pt -> ${FishData.data[it]}pt")
             }
         }
 
@@ -93,6 +97,6 @@ object FishBattleManager {
         }
 
         messages.add("\n")
-        plugin.server.broadcastMessage(messages.joinToString("\n"))
+        FishData.data.keys.forEach { (Bukkit.getPlayer(it.uniqueId) ?: return@forEach).sendMessage(messages.joinToString("\n") + "\n") }
     }
 }

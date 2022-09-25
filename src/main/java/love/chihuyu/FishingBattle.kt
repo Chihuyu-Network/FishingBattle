@@ -53,7 +53,7 @@ class FishingBattle : JavaPlugin(), Listener {
         val result = event.caught as? Item
         val player = event.player
 
-        if (!isStarted || result == null) return
+        if (!isStarted || result == null || !FishData.data.containsKey(player)) return
 
         val point = when (result.itemStack.type) {
             Material.COD -> 1
@@ -110,6 +110,7 @@ class FishingBattle : JavaPlugin(), Listener {
                 }
             }
         }
+        if (!isStarted) return
         if (player !in FishData.data) FishData.data[player] = 0
         FishBattleManager.updateScoreboard()
         server.bossBars.forEach { it.removePlayer(player) }
