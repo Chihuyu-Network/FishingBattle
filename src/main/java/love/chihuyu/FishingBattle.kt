@@ -55,6 +55,10 @@ class FishingBattle : JavaPlugin(), Listener {
 
         if (!isStarted || result == null || !FishData.data.containsKey(player)) return
 
+        if (player.inventory.itemInMainHand.enchantments.isNotEmpty()) {
+            player.sendMessage("${ChatColor.RED}Please use unenchanted fishing rod!")
+        }
+
         val point = when (result.itemStack.type) {
             Material.COD -> 1
             Material.SALMON -> 2
