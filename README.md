@@ -3,53 +3,53 @@ Score attack minigame plugin with fishing.
 
 ## Commands
 
-* `/fishbattle[fb] start`
+* `/fishbattle[fb] start`  
 Start own game.
 
-* `/fb stop`
+* `/fb stop`  
 Stop own game.
 
-* `/fishbattlestats[fbstats] highscore <player>`
+* `/fishbattlestats[fbstats] highscore <player>`  
 See `player`'s highscore.
 
-* `/fbstats totalscore <player>`
+* `/fbstats totalscore <player>`  
 See `player`'s total score.
 
-* `/fbstats totalplays <player>`
+* `/fbstats totalplays <player>`  
 See `player`'s total plays.
 
-* `/fbstats ranking <category>`
+* `/fbstats ranking <category>`  
 See ranking for `category`.  
 Available category is `highscore`, `totalscore`.
 
 ## Permissions
 
-* `fishbattle.fishbattle`
+* `fishbattle.fishbattle`  
 use /fb
 
-* `fishbattle.start`
+* `fishbattle.start`  
 use /fb start
 
-* `fishbattle.stop`
+* `fishbattle.stop`  
 use /fb stop
 
-* `fishbattle.stats`
+* `fishbattle.stats`  
 use /fbstats
 
-* `fishbattle.stats.highscore`
+* `fishbattle.stats.highscore`  
 use /fbstats highscore
 
-* `fishbattle.stats.totalscore`
+* `fishbattle.stats.totalscore`  
 use /fbstats totalscore
 
-* `fishbattle.stats.totalplays`
+* `fishbattle.stats.totalplays`  
 use /fbstats totalplays
 
-* `fishbattle.stats.ranking`
+* `fishbattle.stats.ranking`  
 use /fbstats ranking
 
-* `fishbattle.stats.ranking.totalscore`
+* `fishbattle.stats.ranking.totalscore`  
 use /fbstats ranking totalscore
 
-* `fishbattle.stats.ranking.highscore`
+* `fishbattle.stats.ranking.highscore`  
 use /fbstats ranking highscore
