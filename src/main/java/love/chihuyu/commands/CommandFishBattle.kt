@@ -169,7 +169,7 @@ object CommandFishBattle {
         )
 
     private fun formatTime(timeSeconds: Long): String {
-        return "${"%02d".format(timeSeconds.floorDiv(3600))}:${"%02d".format(timeSeconds.floorDiv(60))}:${"%02d".format(timeSeconds % 60)}"
+        return "${"%02d".format(timeSeconds.floorDiv(3600))}:${"%02d".format(timeSeconds.floorDiv(60) % 60)}:${"%02d".format(timeSeconds % 60)}"
     }
 
     private fun nowEpoch(): Long {
